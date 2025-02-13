@@ -1,0 +1,10 @@
+#fields	indicator	indicator_type	meta.source
+1drv.ms	Intel::DOMAIN	Phishing list (event ID 111270)
+ci4.googleusercontent.com	Intel::DOMAIN	Fed Feed Free feed (event ID 29449)
+ci4.googleusercontent.com	Intel::DOMAIN	Fed Feed Free feed (event ID 5377)
+ci4.googleusercontent.com	Intel::DOMAIN	Fed Feed Free feed (event ID 5418)
+ci4.googleusercontent.com	Intel::DOMAIN	Fed Feed Free feed (event ID 7043)
+ci4.googleusercontent.com	Intel::DOMAIN	Fed Feed Free feed (event ID 7047)
+ci4.googleusercontent.com	Intel::DOMAIN	Fed Feed Free feed (event ID 9716)
+track.adform.net	Intel::DOMAIN	ADS and more ads (event ID 109913)
+track.adform.net	Intel::DOMAIN	Fed Feed Free feed (event ID 5418)

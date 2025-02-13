@@ -1,0 +1,2 @@
+#fields	indicator	indicator_type	meta.source
+http://nmcheck.gnome.org/check_network_status.txt	Intel::URL	Infrastructure to distribute funny network status (event ID 32731)
