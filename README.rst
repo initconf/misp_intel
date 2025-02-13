@@ -28,7 +28,7 @@ On `jq` the following output should be expected :
 
 {
   "ioc": "1drv.ms",
-  "timestamp_rfc3339ns": 1731361469.832664,
+  "timestamp_rfc3339ns": 2025-02-12T16:11:38.658234000Z,
   "detection": "*TCP Traffic*:: `22[.]23.24.25:64447` -> `13[.]107.42.12:443` [X509::IN_CERT]\n*Total bytes*: 327.00B up/8.88KB down",
   "ioc_type": "Intel::DOMAIN",
   "uid": "C2lExp2LUWugdbTvYb",
