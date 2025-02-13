@@ -82,10 +82,21 @@ event Intel::log_intel(rec: Intel::Info)
 
 	# below is 'twisting it' but oh well,
 	# per romain ask 2024/11/12 - Ash
-	# "detection": "*TCP traffic*: `13[.]23.162.251:64990` -> `17[.]20.2.5:443` [Conn::IN_RESP]\n*Total bytes*: 2Mb up/1MB down"
+	# "detection": "*TCP traffic*: `131[.]243.162.251:64990` -> `157[.]240.22.35:443` [Conn::IN_RESP]\n*Total bytes*: 2Mb up/1MB down"
 
-	local sip = split_string1(fmt("%s", rec$id$orig_h), /\./);
-	local dip = split_string1(fmt("%s", rec$id$resp_h), /\./);
+	local sip: vector of string;
+	local dip: vector of string;
+
+	if (is_v6_addr(rec$id$orig_h))
+	{
+		sip = split_string1(fmt("%s", rec$id$orig_h), /\:/);
+		dip = split_string1(fmt("%s", rec$id$resp_h), /\:/);
+	}
+	else
+	{
+		sip = split_string1(fmt("%s", rec$id$orig_h), /\./);
+		dip = split_string1(fmt("%s", rec$id$resp_h), /\./);
+	}
 	local sport = fmt("%d", rec$id$orig_p);
 	local dport = fmt("%d", rec$id$resp_p);
 	local bytes_up = rec$seen$conn$orig$num_bytes_ip;
@@ -96,10 +107,20 @@ event Intel::log_intel(rec: Intel::Info)
 	s$ioc = rec$seen$indicator;
 	s$timestamp_rfc3339ns = to_rfc3339ns(rec$ts);
 	#s$detection = d;
+	if (is_v6_addr(rec$id$orig_h))
+	{
+	s$detection = fmt(
+	    "%s: `%s[:]%s:%s` -> `%s[:]%s:%s` [%s]\n*Total bytes*: %s up/%s down",
+	    proto, sip[0], sip[1], sport, dip[0], dip[1], dport, rec$seen$where,
+	    bytes_to_human(bytes_up), bytes_to_human(bytes_down));
+	}
+	else
+	{
 	s$detection = fmt(
 	    "%s: `%s[.]%s:%s` -> `%s[.]%s:%s` [%s]\n*Total bytes*: %s up/%s down",
 	    proto, sip[0], sip[1], sport, dip[0], dip[1], dport, rec$seen$where,
 	    bytes_to_human(bytes_up), bytes_to_human(bytes_down));
+	}
 
 	s$ioc_type = rec$seen$indicator_type;
 	s$uid = rec$uid;
