@@ -82,7 +82,7 @@ event Intel::log_intel(rec: Intel::Info)
 
 	# below is 'twisting it' but oh well,
 	# per romain ask 2024/11/12 - Ash
-	# "detection": "*TCP traffic*: `131[.]243.162.251:64990` -> `157[.]240.22.35:443` [Conn::IN_RESP]\n*Total bytes*: 2Mb up/1MB down"
+	# "detection": "*TCP traffic*: `13[.]23.162.251:64990` -> `17[.]20.2.5:443` [Conn::IN_RESP]\n*Total bytes*: 2Mb up/1MB down"
 
 	local sip = split_string1(fmt("%s", rec$id$orig_h), /\./);
 	local dip = split_string1(fmt("%s", rec$id$resp_h), /\./);
