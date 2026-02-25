@@ -22,23 +22,34 @@ Features
 Supported Indicator Types
 -------------------------
 
-- Domains (``Intel::DOMAIN``)
-- Hostnames
-- IP addresses - source and destination (``Intel::ADDR``)
-- JA3 fingerprints (``Intel::JA3``)
+Zeek's Intel framework defines the following indicator types. This package
+can ingest and match any of them through its feed files:
+
+- IP addresses (``Intel::ADDR``)
+- Subnets in CIDR notation (``Intel::SUBNET``)
+- DNS domain names (``Intel::DOMAIN``)
+- Complete URLs (``Intel::URL``)
+- Email addresses (``Intel::EMAIL``)
+- Software names (``Intel::SOFTWARE``)
+- User names (``Intel::USER_NAME``)
+- Certificate SHA-1 hashes (``Intel::CERT_HASH``)
+- Public key MD5 hashes (``Intel::PUBKEY_HASH``)
 - File hashes: MD5, SHA1, SHA256, SHA512 (``Intel::FILE_HASH``)
-- URLs (``Intel::URL``)
+- File names (``Intel::FILE_NAME``)
+
+The package ships with feed files for domains, hostnames, IP source/destination,
+JA3 fingerprint MD5 hashes, file hashes (MD5, SHA1, SHA256, SHA512), and URLs.
 
 Installation
 ------------
 
 Via ``zkg`` (recommended)::
 
-    zkg install zeek/initconf/INTEL_MISP
+    zkg install misp_intel
 
 Or load directly in ``local.zeek``::
 
-    @load INTEL_MISP/scripts
+    @load misp_intel/scripts
 
 Configuration
 -------------
@@ -144,9 +155,10 @@ File Structure
 - ``scripts/misp.zeek`` - MISP feed configuration and error handling
 - ``scripts/analyst1.zeek`` - Analyst1 feed configuration
 - ``scripts/test.zeek`` - Local development test overrides (not loaded in production)
+- ``anonymize_pcaps.py`` - Utility to anonymize pcap files for testing
 
 License
 -------
 
-BSD 3-Clause. Copyright (c) 2010-2020, Aashish Sharma and Lawrence
+BSD 3-Clause. Copyright (c) 2010-2026, Aashish Sharma and Lawrence
 Berkeley National Laboratory. See COPYING for details.
