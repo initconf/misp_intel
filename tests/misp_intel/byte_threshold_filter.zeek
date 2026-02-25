@@ -1,21 +1,20 @@
-# Test: Basic JSON output with multiple domain indicators.
-# Loads domain indicators (1drv.ms and track.adform.net) from inline
-# .intel files and replays int.pcap. Expects misp.log with matches
-# for both domains.
+# Test: Byte-threshold suppression.
+# Loads an IP indicator matching the connection in bytes-less-4k.pcap.
+# The connection transfers well under 4096 bytes in both directions,
+# so the misp.log should NOT be produced (suppressed by byte_threshold).
 
 # --- Inline feed files (tab-separated) ---
 
+# @TEST-START-FILE feeds/misp-ip-dst.intel
+#fields	indicator	indicator_type	meta.source	meta.desc	meta.url
+198.51.100.7	Intel::ADDR	MISP	test threshold indicator	-
+# @TEST-END-FILE
+
 # @TEST-START-FILE feeds/misp-domain.intel
 #fields	indicator	indicator_type	meta.source	meta.desc	meta.url
-1drv.ms	Intel::DOMAIN	MISP	test domain indicator	-
-track.adform.net	Intel::DOMAIN	MISP	test domain indicator	-
 # @TEST-END-FILE
 
 # @TEST-START-FILE feeds/misp-hostname.intel
-#fields	indicator	indicator_type	meta.source	meta.desc	meta.url
-# @TEST-END-FILE
-
-# @TEST-START-FILE feeds/misp-ip-dst.intel
 #fields	indicator	indicator_type	meta.source	meta.desc	meta.url
 # @TEST-END-FILE
 
@@ -67,8 +66,8 @@ track.adform.net	Intel::DOMAIN	MISP	test domain indicator	-
 #fields	indicator	indicator_type	meta.source	meta.desc	meta.url
 # @TEST-END-FILE
 
-# @TEST-EXEC: zeek -C -r $TRACES/int.pcap ../../../scripts %INPUT
-# @TEST-EXEC: btest-diff misp.log
+# @TEST-EXEC: zeek -C -r $TRACES/bytes-less-4k.pcap ../../../scripts %INPUT
+# @TEST-EXEC: test ! -f misp.log
 
 redef Intel::read_files = {
 	"./feeds/misp-lbl-whitelist.txt",
@@ -87,7 +86,7 @@ redef Intel::read_files = {
 	"./feeds/remove.tsv",
 	"./feeds/whitelist.tsv",
 };
-redef Site::local_nets += { 10.1.0.0/16, 10.2.0.0/16 };
+redef Site::local_nets += { 10.1.0.0/16 };
 
 # Remove RFC 5737 TEST-NET-2 from local_nets so anonymised remote
 # IPs (198.51.100.x) are treated as external by misp.zeek.

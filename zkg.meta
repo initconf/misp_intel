@@ -1,6 +1,6 @@
 [package]
-description=
+description = Zeek package to ingest MISP threat intelligence feeds and log matches in a JSON format suitable for SOC/SIEM consumption
 script_dir = scripts
-version = 0.1 
-tags = 
+version = 0.2
+tags = misp, intel, threat intelligence, json, siem, ioc
 test_command = ( cd tests && btest -d )

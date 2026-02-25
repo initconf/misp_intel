@@ -1,7 +1,7 @@
 #fields	indicator	indicator_type	meta.source
-153.208.69.8	Intel::ADDR	Fed Feed Free feed (event ID 7065)
-153.208.69.8	Intel::ADDR	Fed Feed Free feed (event ID 7130)
-153.208.69.8	Intel::ADDR	Fed Feed Free feed (event ID 7233)
-153.208.69.8	Intel::ADDR	Fed Feed Free feed (event ID 7233)
-153.208.69.8	Intel::ADDR	Fed Feed Free feed (event ID 9598)
-153.208.69.8	Intel::ADDR	Fed Feed Free feed (event ID 9599)
+192.0.2.10	Intel::ADDR	Fed Feed Free feed (event ID 7065)
+192.0.2.10	Intel::ADDR	Fed Feed Free feed (event ID 7130)
+192.0.2.10	Intel::ADDR	Fed Feed Free feed (event ID 7233)
+192.0.2.10	Intel::ADDR	Fed Feed Free feed (event ID 7233)
+192.0.2.10	Intel::ADDR	Fed Feed Free feed (event ID 9598)
+192.0.2.10	Intel::ADDR	Fed Feed Free feed (event ID 9599)

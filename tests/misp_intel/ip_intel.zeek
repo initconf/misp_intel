@@ -1,21 +1,19 @@
-# Test: Basic JSON output with multiple domain indicators.
-# Loads domain indicators (1drv.ms and track.adform.net) from inline
-# .intel files and replays int.pcap. Expects misp.log with matches
-# for both domains.
+# Test: IP address indicator matching via inline .intel file.
+# Loads a single MISP IP destination indicator (198.51.100.3)
+# and replays int.pcap. Expects misp.log entries for connections to that IP.
 
 # --- Inline feed files (tab-separated) ---
 
+# @TEST-START-FILE feeds/misp-ip-dst.intel
+#fields	indicator	indicator_type	meta.source	meta.desc	meta.url
+198.51.100.3	Intel::ADDR	MISP	test ip indicator	-
+# @TEST-END-FILE
+
 # @TEST-START-FILE feeds/misp-domain.intel
 #fields	indicator	indicator_type	meta.source	meta.desc	meta.url
-1drv.ms	Intel::DOMAIN	MISP	test domain indicator	-
-track.adform.net	Intel::DOMAIN	MISP	test domain indicator	-
 # @TEST-END-FILE
 
 # @TEST-START-FILE feeds/misp-hostname.intel
-#fields	indicator	indicator_type	meta.source	meta.desc	meta.url
-# @TEST-END-FILE
-
-# @TEST-START-FILE feeds/misp-ip-dst.intel
 #fields	indicator	indicator_type	meta.source	meta.desc	meta.url
 # @TEST-END-FILE
 

@@ -1,14 +1,12 @@
-# Test: Basic JSON output with multiple domain indicators.
-# Loads domain indicators (1drv.ms and track.adform.net) from inline
-# .intel files and replays int.pcap. Expects misp.log with matches
-# for both domains.
+# Test: No-match negative test.
+# Loads a domain indicator that does NOT appear in int.pcap.
+# Since nothing matches, misp.log should NOT be produced.
 
 # --- Inline feed files (tab-separated) ---
 
 # @TEST-START-FILE feeds/misp-domain.intel
 #fields	indicator	indicator_type	meta.source	meta.desc	meta.url
-1drv.ms	Intel::DOMAIN	MISP	test domain indicator	-
-track.adform.net	Intel::DOMAIN	MISP	test domain indicator	-
+this-domain-does-not-exist.test	Intel::DOMAIN	MISP	bogus indicator	-
 # @TEST-END-FILE
 
 # @TEST-START-FILE feeds/misp-hostname.intel
@@ -68,7 +66,7 @@ track.adform.net	Intel::DOMAIN	MISP	test domain indicator	-
 # @TEST-END-FILE
 
 # @TEST-EXEC: zeek -C -r $TRACES/int.pcap ../../../scripts %INPUT
-# @TEST-EXEC: btest-diff misp.log
+# @TEST-EXEC: test ! -f misp.log
 
 redef Intel::read_files = {
 	"./feeds/misp-lbl-whitelist.txt",
